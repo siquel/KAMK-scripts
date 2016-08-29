@@ -9,3 +9,18 @@
 ```sh
 ./dump.sh
 ```
+## Example (week 35 menu) 
+```sh
+[dippi@siqubox menu]$ ./dump.sh
+Nakkikastiketta
+Lihaperunalaatikkoa
+Broiler-kasviskastiketta
+Jauhemaksapihviä
+Tonnikalapastavuokaa
+Riistakastiketta
+Jauhelihakeittoa
+Kinkkukiusausta
+Stroganoffia
+Lohipastaa
+
+```
