@@ -3,7 +3,7 @@ use warnings;
 
 my $filename = "/tmp/ruokaa.txt";
 
-open(my $fh, '<:encoding(UTF-8)', $filename) or die "could not open file $filename $!";
+open(my $fh, '<', $filename) or die "could not open file $filename $!";
 
 # read one line, ignore 11 after that, do it 4 timesa
 my $str = "";
