@@ -50,7 +50,7 @@ fi
 
 len=$(echo "$cutted" | wc -l)
 if [[ len -eq 10 ]]; then
-    echo "kymppi"
+    echo "$cutted" | paste -d ";" - -
 elif [[ len -eq 11 ]]; then
     echo "ykstoista"
 else
