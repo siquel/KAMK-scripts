@@ -14,6 +14,21 @@ curl "$url" -s -o /tmp/ruokaa.pdf
 file=$(pdftotext /tmp/ruokaa.pdf -)
 # cut 44 first lines (wednesday start on #45) 
 # cut to EOF at "Keskiviikko"
-echo "$file" | sed -e '1,44d' | sed -n '/Keskiviikko/q;p' > /tmp/ruokaa.txt
+cutted=$(echo "$file" | sed -e '1,44d' | sed -n '/Keskiviikko/q;p')
 
-perl parse.pl
+# offset where to cut
+x=12
+# n is chosen to start as 2 because we save the start line
+# cut 6 times
+for n in {2..7}; do
+    cutted=$(echo "$cutted" | sed -e "$n,$x d"); 
+    # increment offset
+    x=$((x+1));
+done
+
+# cut Tiistai and \n
+# move 4 bottom lines to top (monday and tuesday)
+cutted=$(echo "$cutted" | sed -e '9,10d' | sed -e '1,6{H;d}; ${p;x;s/^\n//}')
+
+echo "$cutted"
+
