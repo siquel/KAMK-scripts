@@ -27,7 +27,7 @@ if [[ $file == *"lkiruoka"* ]]; then
     done
     # cut all shitty lines 
     cutted=$(echo "$cutted" | sed -e "6,8d;11,12d;15,20d;22,32d")
-    cutted=$(echo "$cutted" | awk '{split($0,a,"\n"); print a[5] a[6],a[7],a[8],a[9],a[1],a[2],a[3],a[4],a[10],a[11]}' )
+    cutted=$(echo "$cutted" | awk '{a[NR]=$0} END { print a[6],a[7],a[8],a[9],a[1],a[2],a[3],a[4],a[5],a[10],a[11]}' OFS="\n" )
     echo "$cutted"
 else
     # cut 44 first lines (wednesday start on #45) 
