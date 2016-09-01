@@ -1,26 +1,21 @@
 # Menu dumper 
 
-* Downloads current week menu using curl from http://www.kajaani.fi/mamselli/opiskelijaravintoloiden-ruokalistat as pdf to /tmp/ruokaa.pdf
-* Converts the pdf to text file 
-* Uses sed to cut unnecessary data and saves it to /tmp/ruokaa.txt
-* Invokes parse.pl which transforms it human readable and outputs to STDOUT
+Parses the pdf found on kajaani.fi and outputs it as comma separated values by day. 
 
 ## Usage
 ```sh
+# fetch the current weeks menu
 ./dump.sh
+# fetch specific weeks menu
+./dump.sh [url] 
 ```
-## Example (week 35 menu) 
+## Example
 ```sh
-[dippi@siqubox menu]$ ./dump.sh
-Nakkikastiketta
-Lihaperunalaatikkoa
-Broiler-kasviskastiketta
-Jauhemaksapihviä
-Tonnikalapastavuokaa
-Riistakastiketta
-Jauhelihakeittoa
-Kinkkukiusausta
-Stroganoffia
-Lohipastaa
+[dippi@siqubox menu]$ ./dump.sh http://www.kajaani.fi/sites/default/files/fox_vko_33_linjasto_1_ja_2.pdf
+Makkarakastiketta;Silakkapihviä # monday
+Hedelmäistä broilerkastiketta;Lihakeittoa #tuesday
+Lasagnettea;Maksa-porkkanakastiketta #wednesday
+Hernekeittoa;Kebabkiusausta;Jälkiruoka: Ohukaiset #thursday
+Kalaa venäläiseen tapaan;Jauhelihapihviä #friday
 
 ```
