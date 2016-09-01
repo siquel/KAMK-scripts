@@ -28,7 +28,6 @@ if [[ $file == *"lkiruoka"* ]]; then
     # cut all shitty lines 
     cutted=$(echo "$cutted" | sed -e "6,8d;11,12d;15,20d;22,32d")
     cutted=$(echo "$cutted" | awk '{a[NR]=$0} END { print a[6],a[7],a[8],a[9],a[1],a[2],a[3],a[4],a[5],a[10],a[11]}' OFS="\n" )
-    echo "$cutted"
 else
     # cut 44 first lines (wednesday start on #45) 
     # cut to EOF at "Keskiviikko"
@@ -47,6 +46,13 @@ else
     # cut Tiistai and \n
     # move 4 bottom lines to top (monday and tuesday)
     cutted=$(echo "$cutted" | sed -e '9,10d' | sed -e '1,6{H;d}; ${p;x;s/^\n//}')
+fi
 
-    echo "$cutted"
+len=$(echo "$cutted" | wc -l)
+if [[ len -eq 10 ]]; then
+    echo "kymppi"
+elif [[ len -eq 11 ]]; then
+    echo "ykstoista"
+else
+    echo "invalid shit"
 fi
