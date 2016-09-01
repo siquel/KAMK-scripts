@@ -52,7 +52,8 @@ len=$(echo "$cutted" | wc -l)
 if [[ len -eq 10 ]]; then
     echo "$cutted" | paste -d ";" - -
 elif [[ len -eq 11 ]]; then
-    echo "ykstoista"
+    # join jalkiruoka so we can use paste
+    echo "$cutted" | sed '8N;s/\n/;/' | paste -d ";" - -
 else
     echo "invalid shit"
 fi
