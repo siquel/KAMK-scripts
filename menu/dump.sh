@@ -4,8 +4,10 @@ url="$1"
 
 # if user didn't provide url, fetch it from kajaani.fi
 if [[ -z "$url" ]]; then
-    # fetch current weeks url
-    url=$(curl -s http://www.kajaani.fi/fi/mamselli/opiskelijaravintoloiden-ruokalistat | grep -P "fox_vko_[0-9]{1,2}_linjasto_1_ja_2" | sed -r 's/.+?\"(http.+?pdf)\".+/\1/')
+    # get week number
+    week=$(/bin/date +%V)
+    # current weeks url
+    url=$(printf "http://www.kajaani.fi/sites/default/files/fox_vko_%d_linjasto_1_ja_2.pdf" $week)
 fi
 
 curl -s "$url" -o /tmp/ruokaa.pdf
