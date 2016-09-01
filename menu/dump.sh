@@ -8,7 +8,7 @@ if [[ -z "$url" ]]; then
     url=$(curl -s http://www.kajaani.fi/fi/mamselli/opiskelijaravintoloiden-ruokalistat | grep -P "fox_vko_[0-9]{1,2}_linjasto_1_ja_2" | sed -r 's/.+?\"(http.+?pdf)\".+/\1/')
 fi
 
-curl "$url" -o /tmp/ruokaa.pdf
+curl -s "$url" -o /tmp/ruokaa.pdf
 
 # dump pdf to txt
 file=$(pdftotext /tmp/ruokaa.pdf -)
@@ -27,7 +27,7 @@ if [[ $file == *"lkiruoka"* ]]; then
     done
     # cut all shitty lines 
     cutted=$(echo "$cutted" | sed -e "6,8d;11,12d;15,20d;22,32d")
-#    echo "$cutted"
+    cutted=$(echo "$cutted" | awk '{split($0,a,"\n"); print a[5] a[6],a[7],a[8],a[9],a[1],a[2],a[3],a[4],a[10],a[11]}' )
     echo "$cutted"
 else
     # cut 44 first lines (wednesday start on #45) 
